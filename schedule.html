@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>甘街 桃音</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script src="https://code.jquery-3.6.0.min.js"></script>
+  <script src="js/menu.js"></script>
+</head>
+<body>
+
+  <div id="splash">
+  <div id="splash_text"></div>
+</div>
+
+<div id="container">
+  <p>ローディング後、この画面が見えます。</p>
+</div>
+
+  
+  <!-- ヘッダー -->
+  <header class="page-header">
+    <h1>
+    <a href="index.html">
+      <img class="logo" src="images/head.png" alt="サイトロゴ">
+    </a>
+  </h1>
+    <nav>
+      <ul class="main-nav">
+        <li class="news"><a href="index.html">お知らせ</a></li>
+        <li class="plofile"><a href="profile.html">プロフィール</a></li>
+        <li class="schedule active"><a href="#schedule">スケジュール</a></li>
+        <li class="goods"><a href="goods.html">グッズ</a></li>
+        <li class="contact"><a href="contact.html">お問い合わせ</a></li>
+        <li class="license">
+        <small>
+          使用フォント：いろはマル / 解星 特ミン<br>
+        </small>
+        </li>
+      </ul>
+    </nav>
+    <div class="menu-toggle" id="menu-toggle">☰</div>
+  </header>
+
+  <!-- ページごとのメインコンテンツ -->
+  
+<main>
+  <section class="schedule" id="schedule">
+    <div style="text-align:center;">
+      <h2 data-text="スケジュール">スケジュール</h2>
+    </div>
+
+    <!-- カレンダー風テーブル -->
+    <table class="schedule-table">
+      <thead>
+        <tr>
+          <th>日付</th>
+          <th>時間</th>
+          <th>内容</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>8月21日</td>
+          <td>20:00〜</td>
+          <td>初配信</td>
+        </tr>
+        <tr>
+          <td>8月23日</td>
+          <td>21:00〜</td>
+          <td>雑談配信</td>
+        </tr>
+        <tr>
+          <td>8月25日</td>
+          <td>21:00〜</td>
+          <td>雑談配信</td>
+        </tr>
+        <tr>
+          <td>8月30日</td>
+          <td>20:00〜</td>
+          <td>ゲーム配信（n番入口）</td>
+        </tr>
+        <tr>
+          <td>9月2日</td>
+          <td>20:00〜</td>
+          <td>歌枠</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 配信サイトリンク -->
+    <div class="stream-links">
+  <article class="stream-card">
+    <a href="https://www.youtube.com/" target="_blank">
+      <div class="icon-btn youtube">
+        <i class="fab fa-youtube"></i>
+      </div>
+      <h3>YouTube</h3>
+    </a>
+  </article>
+
+  <article class="stream-card">
+    <a href="https://www.twitch.tv/" target="_blank">
+      <div class="icon-btn twitch">
+        <i class="fab fa-twitch"></i>
+      </div>
+      <h3>Twitch</h3>
+    </a>
+  </article>
+
+  <article class="stream-card">
+    <a href="https://www.niconico.jp/" target="_blank">
+      <div class="icon-btn niconico">
+        <i class="fas fa-tv"></i>
+      </div>
+      <h3>ニコニコ</h3>
+    </a>
+  </article>
+</div>
+  </section>
+</main>
+
+
+
+  <!-- フッター -->
+    <footer class="site-footer">
+    <p id="page-top"><a href="#">
+      <i class="fas fa-arrow-up"></i>
+    </a></p>
+  <nav class="footer-nav">
+    <ul>
+      <li><a href="index.html">お知らせ</a></li>
+      <li><a href="profile.html">プロフィール</a></li>
+      <li><a href="#schedule">スケジュール</a></li>
+      <li><a href="goods.html">グッズ</a></li>
+      <li><a href="contact.html">お問い合わせ</a></li>
+    </ul>
+  </nav>
+  <p class="copyright">
+  &copy; 2025 Vtuber Project <br>
+  使用フォント：「いろはマル」（作者名/配布元）, 「解星 特ミン」(Google Fonts, OFL)
+</p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/progressbar.js"></script>
+<script src="js/4-1-2.js"></script>
+<script src="js/5-1-8.js"></script>
+<script src="js/8-1-6.js"></script>
+
+</body>
+</html>

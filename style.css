@@ -1,0 +1,773 @@
+@charset "UTF-8";
+
+/* 共通部分
+------------------- */
+html {
+    font-size: 100%;
+}
+img {
+    max-width: 100%;   /* 50% だと小さくなりすぎる場合があるので修正 */
+    height: auto;
+}
+body {
+  font-family: "HonbunFont", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+h1, h2, h3 {
+  font-family: "MidashiFont", serif;
+}
+h2 {
+  position: relative;
+  font-size: 2rem;
+  text-align: center;  /* 親で中央揃え */
+  background: linear-gradient(45deg, #F564A9, #FFC2D3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block; /* テキスト幅で収める */
+}
+
+/* 下線 */
+h2::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -8px; /* 文字の下に配置 */
+  transform: translateX(-50%);
+  width: 100px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #F564A9, #FFC2D3);
+}
+
+h2::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 4px;       /* 縦にずらす */
+  left: 4px;      /* 横にずらす */
+  color: #EBDDDA; /* 影の色 */
+  z-index: -1;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+/*== ローディング画面のためのCSS */
+
+/* 本文用フォント */
+@font-face {
+  font-family: "HonbunFont";
+  src: url("irohamaru/Light.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 見出し用フォント */
+@font-face {
+  font-family: "MidashiFont";
+  src: url("Tokumin/Bold.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/* 画面全面の覆い */
+#splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #FAA4BD;
+  color: #533B4D;
+  display: flex;              /* ← 改行せずに書く */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+
+/* バーのコンテナ（親基準にする！） */
+#splash_text {
+  position: relative;       /* ★ここが重要（absoluteはNG） */
+  width: 80%;
+  max-width: 400px;
+  margin: 0 auto;
+  color: #533B4D;
+  height: 30px;
+  position: relative;
+}
+
+/* バー(SVG)の高さを明示 */
+#splash_text svg {
+  height: 4px;              /* お好みで 2〜6px */
+  width: 100%;
+  display: block;
+}
+
+/* まだなら：ローディング中は本文非表示 */
+#container { 
+  display: none; 
+}
+
+body {
+  font-size: 16px;  /* デフォルト */
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;  /* 少し小さめに */
+  }
+  h2, h3 {
+    font-size: 1.5rem;
+  }
+  .goods-item img {
+    max-width: 80%; /* 画面幅に合わせる */
+  }
+}
+
+
+/* header
+------------------- */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;          /* ← 高さで指定 */
+  background: #FAA4BD;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: height 0.3s ease;
+  padding: 0 20px;        /* 左右だけpadding */
+}
+
+/* 縮んだとき */
+.page-header.small {
+  height: 60px;           /* ← 小さくする */
+}
+
+.logo {
+  width: 300px;      /* ロゴだけ固定サイズにしておくと安定 */
+}
+.head {
+    width: 100px;
+    margin-top: 14px;
+}
+.main-nav {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.main-nav li {
+    margin-left: 36px;
+    display: inline-block;
+}
+.main-nav a {
+    color: #533B4D;
+    text-decoration: none;
+}
+.main-nav a:hover {
+    color: #533B4D;
+    opacity: 0.7;
+}
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;   /* ナビとロゴを縦方向で揃える */
+    
+    padding: 0 20px;
+}
+
+/* PCでは普通の横並び */
+.main-nav ul {
+  display: flex;
+  gap: 36px;
+}
+
+/* ハンバーガーボタンはPCでは非表示 */
+.menu-toggle {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* スマホ用 */
+@media (max-width: 768px) {
+  .main-nav ul {
+    display: none; /* 初期は隠す */
+    flex-direction: column;
+    background: #fff;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  .main-nav ul.show {
+    display: flex; /* ボタン押したら表示 */
+  }
+
+  .menu-toggle {
+    display: block; /* スマホでは表示 */
+  }
+}
+
+.main-nav ul .license {
+  margin-top: 20px;
+  font-size: 0.7rem;
+  color: #666;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* PCではフッターを表示 */
+.site-footer {
+  display: block;
+}
+
+/* スマホではフッター非表示 */
+@media (max-width: 768px) {
+  .site-footer {
+    display: none;
+  }
+}
+
+/* デフォルト（PC用）は非表示 */
+.license {
+  display: none;
+}
+
+/* スマホ用（768px以下）は表示 */
+@media (max-width: 768px) {
+  .license {
+    display: block;
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: #533B4D;
+    text-align: center;
+  }
+}
+
+
+/* 円が線に変化　*/
+
+.main-nav li a {
+  /*円の起点とするためrelativeを指定*/
+  position: relative;
+  display: block;
+  padding: 10px 30px;
+}
+.main-nav li.active a,
+.main-nav li a:hover {
+  color: #533B4D;
+}
+
+.main-nav li a::after {
+  content: '';
+  /*絶対配置で線の位置を決める*/
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  /*線になる丸の形状*/
+  width: 100%;
+  height: 5px;
+  border-radius: 50%;
+  background: #533B4D;
+  /*アニメーションの指定*/
+  transition: all .3s;
+  /*X方向0.04、Y方向1*/
+  transform: scale(0.04, 1);
+  /*中央下部基点*/
+  transform-origin:center bottom;
+}
+
+/*現在地とhoverの設定*/
+.main-nav li.active a::after,
+.main-nav li a:hover::after {
+  height: 2px;/*縦幅を変化*/
+  border-radius: 0;/*丸みをなくす*/
+  /*X方向0.8、Y方向1にスケール拡大*/
+  transform: scale(0.8, 1);
+}
+
+/* スマホ用 */
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;   /* ロゴの下にナビを置く */
+    height: auto;             /* 高さ自動に */
+    padding: 10px;
+  }
+
+  .logo {
+    width: 200px; /* ロゴを小さめに */
+    margin-bottom: 10px;
+  }
+
+  .main-nav {
+    flex-direction: column; /* ナビを縦並びに */
+    gap: 10px;
+  }
+
+  .main-nav li {
+    margin: 0; /* 左余白を消す */
+  }
+}
+
+/* index
+------------------- */
+
+.hero {
+  display: flex;
+  justify-content: center;   /* 横方向の中央揃え */
+  align-items: center;       /* 縦方向を中央揃え */
+  gap: 50px;                 /* キャラとロゴの間隔 */
+  margin: 60px auto;
+}
+
+.main-chara {
+  width: 400px;
+}
+
+.main-logo {
+  width: 500px;
+}
+
+/* スマホ対応 */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;  /* 縦並び */
+    gap: 20px;
+  }
+
+  .main-chara,
+  .main-logo {
+    width: 90%;
+    max-width: 350px;
+  }
+
+  .main-chara {
+    order: 1; /* 上 */
+  }
+
+  .main-logo {
+    order: 2; /* 下 */
+  }
+}
+
+
+.news {
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.news h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #533B4D;
+}
+
+.news-list {
+  display: flex;
+  flex-direction: column;         /* 上から下へ */
+  gap: 20px;               /* カード間の余白 */
+  justify-content: center; /* 中央寄せ */
+  align-items: center;
+}
+
+.news-card {
+  background: #fff0f5;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 500px;
+  height: 80px;
+  padding: 20px;
+  transition: transform 0.2s;
+}
+
+.news-card h3 {
+  font-size: 1.25rem;
+  margin: 5px 0;
+  color: #533B4D;
+}
+
+.news-card p {
+  font-size: 0.9rem;
+  color: #533B4D;
+}
+
+.news-card:hover {
+  transform: translateY(-5px); /* ホバーで浮く演出 */
+}
+
+/* profile
+------------------- */
+
+.profile-container {
+  display: flex;
+  align-items: center;   /* やっぱcenterで */
+  justify-content: center;   /* 中央寄せ */
+  gap: 40px;                 /* 画像とテキストの間隔 */
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.profile-img {
+  width: 600px;              /* キャラ画像のサイズ調整 */
+  border-radius: 10px;       /* 角を少し丸めると柔らかい雰囲気に */
+}
+
+.profile-text {
+  max-width: 600px;
+  background: #fff0f5;        /* 薄いピンク系背景 */
+  padding: 20px 25px;
+  border-radius: 12px;        /* 角を丸める */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* ほんのり影 */
+}
+
+.profile-text h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #533B4D;
+}
+
+.introduction {
+  text-align: center;
+  font-size: 2rem;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  background: linear-gradient(45deg, #F564A9, #FFC2D3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  margin-bottom: 1.5em;
+}
+
+.introduction::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #F564A9, #FFC2D3);
+}
+
+
+.video-wrapper {
+  display: flex;
+  justify-content: center; /* 中央揃え */
+  margin-bottom: 2em;
+}
+
+.profile-text p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #533B4D;
+}
+@media (max-width: 768px) {
+  .profile-container {
+    flex-direction: column;  /* スマホでは縦並び */
+    text-align: center;
+  }
+}
+
+/* schedule
+------------------- */
+/* スケジュール表 */
+.schedule-table {
+  width: 90%;
+  max-width: 800px;
+  margin: 30px auto;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.schedule-table th,
+.schedule-table td {
+  border: 1px solid #ddd;
+  padding: 12px 16px;
+}
+
+.schedule-table th {
+  background: #533B4D;
+  color: #fff;
+}
+
+.schedule-table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/* 配信サイトカード */
+.stream-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.stream-card {
+  width: 200px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.stream-card a {
+  display: flex;
+  flex-direction: column; /* アイコン→文字を縦並びに */
+  align-items: center;
+  text-decoration: none;   /* 下線を消す */
+}
+
+.icon-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #FAA4BD; /* サイトテーマカラー */
+  color: white;
+  font-size: 1.5rem;
+  margin: 10px;
+  transition: transform 0.3s;
+}
+.icon-btn:hover {
+  transform: translateY(-3px);
+}
+
+.stream-card h3 {
+  font-size: 1.2rem;
+  margin: 15px 0;
+  color: #533B4D;
+}
+
+.stream-card:hover {
+  transform: translateY(-5px);
+}
+
+/* goods
+------------------- */
+main h2 {
+  text-align: center;   /* 見出しを中央揃え */
+  margin-bottom: 30px;
+}
+
+.goods-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* PCでは2列 */
+  gap: 20px;
+  justify-content: center;
+  max-width: 800px;  /* 中央寄せ用 */
+  margin: 0 auto;
+}
+
+.goods-item {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.goods-item img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.goods-item p {
+  margin: 10px 0 20px;
+  font-size: 0.95rem;
+}
+
+.goods-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* スマホ用（768px以下で1列に） */
+@media (max-width: 768px) {
+  .goods-list {
+    grid-template-columns: 1fr; /* 1列 */
+    max-width: 300px;
+  }
+}
+
+
+.buy-btn {
+  display: inline-block;   /* aタグをボタンっぽく */
+  padding: 12px;
+  background: #533B4D;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;   /* 下線消す */
+  transition: transform 0.2s, background 0.3s;
+  margin-top: auto; /* ボタンを一番下に寄せる */
+}
+
+.buy-btn:hover {
+  background: #77536d;
+  transform: translateY(-3px);
+}
+
+
+/* contact
+------------------- */
+.contact {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.contact h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #533B4D;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.contact-form button {
+  padding: 12px;
+  background: #533B4D;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s, backgrouns 0.3s;
+}
+
+.contact-form button:hover {
+  background: #77536d;
+  transform: translateY(-3px);
+}
+
+/* ページトップリンク*/
+/* リンクの形状 */
+#page-top a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #533B4D;
+  border-radius: 5px;
+  width: 60px;
+  height: 60px;
+  color: #C1ABA6;
+  text-decoration: none;
+  font-size: 24px; /* ← アイコンサイズ調整 */
+  transition: all 0.3s;
+}
+
+#page-top a:hover {
+  background: #77536d;
+}
+
+/*リンクを右下に固定*/
+#page-top {
+  position: fixed;
+  right: 10px;
+  z-index: 2;
+  /*初めは非表示*/
+  opacity: 0;
+  transform: translateY(100px);
+}
+
+/*上に上がる動き*/
+#page-top.UpMove{
+  animation: UpAnime 0.5s forwards;
+}
+
+@keyframes UpAnime{
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*下に下がる動き*/
+#page-top.DownMove{
+  animation: DownAnime 0.5s forwards;
+}
+
+@keyframes DownAnime{
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(100px);
+  }
+}
+
+
+/* footer
+------------------- */
+.site-footer {
+  background: #533B4D;        /* 無地背景（薄いグレー） */
+  padding: 30px 20px;
+  text-align: center;
+  margin-top: 60px;
+}
+
+.footer-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 15px 0;
+  display: flex;
+  justify-content: center;
+  gap: 30px;                 /* ボタン間の余白 */
+}
+
+.footer-nav a {
+  text-decoration: none;
+  color: #ffffff;            /* サイトの基調色に合わせる */
+  font-size: 1rem;
+  font-weight: bold;
+  transition: opacity 0.3s;
+}
+
+.footer-nav a:hover {
+  opacity: 0.7;
+}
+
+.copyright {
+  font-size: 0.8rem;
+  color: #ffffff;
+}

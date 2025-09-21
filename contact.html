@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>甘街 桃音</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script src="https://code.jquery-3.6.0.min.js"></script>
+  <script src="js/menu.js"></script>
+</head>
+<body>
+
+  <div id="splash">
+  <div id="splash_text"></div>
+</div>
+
+<div id="container">
+  <p>ローディング後、この画面が見えます。</p>
+</div>
+
+  
+    <!-- ヘッダー -->
+  <header class="page-header">
+    <h1>
+    <a href="index.html">
+      <img class="logo" src="images/head.png" alt="サイトロゴ">
+    </a>
+  </h1>
+    <nav>
+      <ul class="main-nav">
+        <li class="news"><a href="index.html">お知らせ</a></li>
+        <li class="plofile"><a href="profile.html">プロフィール</a></li>
+        <li class="schedule"><a href="schedule.html">スケジュール</a></li>
+        <li class="goods"><a href="goods.html">グッズ</a></li>
+        <li class="contact active"><a href="#contact">お問い合わせ</a></li>
+        <li class="license">
+        <small>
+          使用フォント：いろはマル / 解星 特ミン<br>
+        </small>
+      </li>
+      </ul>
+    </nav>
+    <div class="menu-toggle" id="menu-toggle">☰</div>
+  </header>
+
+
+  <main>
+    <section class="contact" id="contact">
+        <div style="text-align:center;">
+            <h2 data-text="お問い合わせ">お問い合わせ</h2>
+        </div>
+      <p>ご依頼・ご相談は以下のフォームよりお気軽にご連絡ください。</p>
+      
+      <form class="contact-form">
+       <label for="name">お名前</label>
+       <input type="text" id="name" name="name" placeholder="例：甘街 桃音">
+       
+       <label for="email">メールアドレス</label>
+       <input type="email" id="email" name="email" placeholder="example@example.com">
+
+       <label for="message">お問い合せ内容</label>
+       <textarea id="message" name="message" rows="6" placeholder="ご用件をご記入ください"></textarea>
+
+       <button type="button">送信する</button>
+      </form>
+    </section>
+  </main>
+
+
+  <!-- フッター -->
+  <footer class="site-footer">
+    <p id="page-top"><a href="#">
+      <i class="fas fa-arrow-up"></i>
+    </a></p>
+  <nav class="footer-nav">
+    <ul>
+      <li><a href="index.html">お知らせ</a></li>
+      <li><a href="profile.html">プロフィール</a></li>
+      <li><a href="schedule.html">スケジュール</a></li>
+      <li><a href="goods.html">グッズ</a></li>
+      <li><a href="#contact">お問い合わせ</a></li>
+    </ul>
+  </nav>
+  <p class="copyright">
+  &copy; 2025 Vtuber Project <br>
+  使用フォント：「いろはマル」（作者名/配布元）, 「解星 特ミン」(Google Fonts, OFL)
+</p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/progressbar.js"></script>
+<script src="js/4-1-2.js"></script>
+<script src="js/5-1-8.js"></script>
+<script src="js/8-1-6.js"></script>
+
+</body>
+</html>
